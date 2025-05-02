@@ -18,10 +18,8 @@ public class BootstrapState : IState
         _sceneLoader.Load(Initial, onLoaded: EnterLoadLevel);
     }
 
-    private void EnterLoadLevel()
-    {
-        _gameStateMachine.Enter<LoadLevelState>();
-    }
+    private void EnterLoadLevel() =>
+        _gameStateMachine.Enter<LoadLevelState, string>("SampleScene");
 
     private void RegisterServices()
     {
