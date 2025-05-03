@@ -123,6 +123,11 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!225 &64712343 stripped
+CanvasGroup:
+  m_CorrespondingSourceObject: {fileID: 5632060257226038755, guid: 3fdbb24e02456ea4fabf771ea408af34, type: 3}
+  m_PrefabInstance: {fileID: 7105475060111897241}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &64712347 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3597523108197488898, guid: 3fdbb24e02456ea4fabf771ea408af34, type: 3}
@@ -379,6 +384,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Curtain
       objectReference: {fileID: 0}
+    - target: {fileID: 3597523108197488898, guid: 3fdbb24e02456ea4fabf771ea408af34, type: 3}
+      propertyPath: Curtain
+      value: 
+      objectReference: {fileID: 64712343}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
