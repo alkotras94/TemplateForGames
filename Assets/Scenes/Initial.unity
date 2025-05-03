@@ -380,6 +380,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1614658647900051327, guid: 3fdbb24e02456ea4fabf771ea408af34, type: 3}
+      propertyPath: m_VertexColorAlwaysGammaSpace
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3016390461801436611, guid: 3fdbb24e02456ea4fabf771ea408af34, type: 3}
       propertyPath: m_Name
       value: Curtain
