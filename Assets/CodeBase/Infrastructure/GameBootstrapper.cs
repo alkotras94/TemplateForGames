@@ -1,17 +1,22 @@
 ﻿using UnityEngine;
 using TMPro.EditorUtilities;
+using Assets.CodeBase.Infrastructure.States;
+using Assets.CodeBase.Logic;
 
-public class GameBootstrapper : MonoBehaviour, ICoroutineRunner
+namespace Assets.CodeBase.Infrastructure
 {
-    public LoadingCurtain LoadingCurtain;
-    private Game _game;
-
-    private void Awake()
+    public class GameBootstrapper : MonoBehaviour, ICoroutineRunner
     {
-        _game = new Game(this, LoadingCurtain);
-        _game.GameStateMachine.Enter<BootstrapState>();
+        public LoadingCurtain LoadingCurtain;
+        private Game _game;
 
-        DontDestroyOnLoad(this);
+        private void Awake()
+        {
+            _game = new Game(this, LoadingCurtain);
+            _game.GameStateMachine.Enter<BootstrapState>();
 
+            DontDestroyOnLoad(this);
+
+        }
     }
 }

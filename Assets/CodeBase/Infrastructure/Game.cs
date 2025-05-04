@@ -1,11 +1,16 @@
-﻿using System;
-public class Game
+﻿using Assets.CodeBase.Infrastructure.States;
+using Assets.CodeBase.Logic;
+using System;
+
+namespace Assets.CodeBase.Infrastructure
 {
-    public GameStateMachine GameStateMachine;
+    public class Game
+    {
+        public GameStateMachine GameStateMachine;
 
-    public Game(ICoroutineRunner coroutineRunner, LoadingCurtain loadingCurtain)
-	{
-		GameStateMachine = new GameStateMachine(new SceneLoader(coroutineRunner), loadingCurtain);
-	}
+        public Game(ICoroutineRunner coroutineRunner, LoadingCurtain loadingCurtain)
+        {
+            GameStateMachine = new GameStateMachine(new SceneLoader(coroutineRunner), loadingCurtain);
+        }
+    }
 }
-

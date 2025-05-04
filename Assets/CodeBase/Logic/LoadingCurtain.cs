@@ -2,31 +2,34 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LoadingCurtain : MonoBehaviour
+namespace Assets.CodeBase.Logic
 {
-    public CanvasGroup Curtain;
-    private void Awake()
+    public class LoadingCurtain : MonoBehaviour
     {
-        DontDestroyOnLoad(this);
-    }
-
-    public void Show()
-    {
-        gameObject.SetActive(true);
-        Curtain.alpha = 1;
-    }
-
-    public void Hide() =>
-        StartCoroutine(FadeIn());
-
-    private IEnumerator FadeIn()
-    {
-        while (Curtain.alpha > 0)
+        public CanvasGroup Curtain;
+        private void Awake()
         {
-            Curtain.alpha -= 0.03f;
-            yield return new WaitForSeconds(0.03f); 
+            DontDestroyOnLoad(this);
         }
 
-        gameObject.SetActive(false);
+        public void Show()
+        {
+            gameObject.SetActive(true);
+            Curtain.alpha = 1;
+        }
+
+        public void Hide() =>
+            StartCoroutine(FadeIn());
+
+        private IEnumerator FadeIn()
+        {
+            while (Curtain.alpha > 0)
+            {
+                Curtain.alpha -= 0.03f;
+                yield return new WaitForSeconds(0.03f);
+            }
+
+            gameObject.SetActive(false);
+        }
     }
 }
