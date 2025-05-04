@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Assets.CodeBase.Infrastructure.Services
 {
-    class AllServices
+    public class AllServices
     {
         private static AllServices _container;
         public static AllServices Container => _container ?? (_container = new AllServices());
