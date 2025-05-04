@@ -33,7 +33,7 @@ namespace Assets.CodeBase.Infrastructure.States
         private void RegisterServices()
         {
             _services.RegisterSingle<IAsset>(new AssetProvider());
-            _services.RegisterSingle<IGameFactory>(new GameFactory(AllServices.Container.Single<IAsset>()));
+            _services.RegisterSingle<IGameFactory>(new GameFactory(_services.Single<IAsset>()));
         }
 
         public void Exit()
