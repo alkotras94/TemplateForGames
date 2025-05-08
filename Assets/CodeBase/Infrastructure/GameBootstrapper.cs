@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using TMPro.EditorUtilities;
 using Assets.CodeBase.Infrastructure.States;
 using Assets.CodeBase.Logic;
 
