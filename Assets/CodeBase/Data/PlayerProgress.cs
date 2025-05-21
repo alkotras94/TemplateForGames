@@ -6,5 +6,10 @@ namespace CodeBase.Data
     public class PlayerProgress
     {
         public WorlData WorldData;
+
+        public PlayerProgress(string initialLevel)
+        {
+            WorldData = new WorlData(initialLevel);
+        }
     }
 }

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace CodeBase.Data
 {
@@ -9,5 +10,11 @@ namespace CodeBase.Data
         
         public static Vector3 AsUnityVector(this Vector3Data vector) =>
             new Vector3(vector.X, vector.Y, vector.Z);
+
+        public static string ToJson(this object obj) => 
+            JsonUtility.ToJson(obj);
+        
+        public static T ToDeserialized<T>(this string json) => 
+            JsonUtility.FromJson<T>(json);
     }
 }

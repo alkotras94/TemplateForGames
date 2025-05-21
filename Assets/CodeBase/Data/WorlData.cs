@@ -6,5 +6,10 @@ namespace CodeBase.Data
     public class WorlData
     {
         public PositionOnLevel PositionOnLevel;
+
+        public WorlData(string initialLevel)
+        {
+            PositionOnLevel = new PositionOnLevel(initialLevel);
+        }
     }
 }
