@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &1717652008701228728
+--- !u!1 &7173628318029795945
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,40 +8,40 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 6797697742817483536}
-  - component: {fileID: 8535569749854596534}
+  - component: {fileID: 6452380621407329424}
+  - component: {fileID: 2548505199547277281}
   m_Layer: 0
-  m_Name: GameBootstrapper
+  m_Name: GameRunner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &6797697742817483536
+--- !u!4 &6452380621407329424
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1717652008701228728}
+  m_GameObject: {fileID: 7173628318029795945}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.2180844, y: 0.5376537, z: -0.009910925}
+  m_LocalPosition: {x: 0.19744962, y: 2.2400882, z: -0.10580662}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8535569749854596534
+--- !u!114 &2548505199547277281
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1717652008701228728}
+  m_GameObject: {fileID: 7173628318029795945}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 261dff57ba7544a95bdeb331ee97a482, type: 3}
+  m_Script: {fileID: 11500000, guid: 59992cff8c504a9ab1b7a5b4da84870d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CurtainPrefafb: {fileID: 3597523108197488898, guid: 3fdbb24e02456ea4fabf771ea408af34, type: 3}
+  BootstrapperPrefab: {fileID: 8535569749854596534, guid: 1a6ef5690a54a4ce38a217f51834dd1a, type: 3}

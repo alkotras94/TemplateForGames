@@ -45,7 +45,7 @@ namespace Assets.CodeBase.Infrastructure.States
 
         private void InformProgressReaders()
         {
-            foreach (ISavedProgress progressReader in _gameFactory.ProgressReaders)
+            foreach (ISavedProgressReader progressReader in _gameFactory.ProgressReaders)
                 progressReader.LoadProgress(_progressService.Progress);
         }
 
