@@ -52,6 +52,7 @@ namespace Assets.CodeBase.Infrastructure.States
         private void InitGameWorld()
         {
             GameObject player = _gameFactory.CreateHero(GameObject.FindWithTag(InitialPointTag));
+            GameObject hud = _gameFactory.CreateHud();
             _gameStateMachine.Enter<GameLoopState>();
         }
     }

@@ -3,8 +3,10 @@ using Assets.CodeBase.Infrastructure;
 using Assets.CodeBase.Infrastructure.Factory;
 using Assets.CodeBase.Infrastructure.Services;
 using System;
+using Assets.CodeBase.Infrastructure.Services.Input;
 using Assets.CodeBase.Infrastructure.Services.PersistentProgress;
 using CodeBase.Infrastructure.Services.SaveLoad;
+using UnityEngine;
 
 namespace Assets.CodeBase.Infrastructure.States
 {
@@ -34,6 +36,7 @@ namespace Assets.CodeBase.Infrastructure.States
 
         private void RegisterServices()
         {
+            _services.RegisterSingle<IInputService>(InputService());
             _services.RegisterSingle<IAsset>(new AssetProvider());
             _services.RegisterSingle<IPersistentProgressService>(new PersistentProgressService());
             _services.RegisterSingle<IGameFactory>(new GameFactory(_services.Single<IAsset>()));
@@ -43,6 +46,18 @@ namespace Assets.CodeBase.Infrastructure.States
         public void Exit()
         {
 
+        }
+
+        private static IInputService InputService()
+        {
+            if (Application.isEditor)
+            {
+                return new StandaloneInputService();
+            }
+            else
+            {
+                return new MobileinputService();
+            }
         }
     }
 }

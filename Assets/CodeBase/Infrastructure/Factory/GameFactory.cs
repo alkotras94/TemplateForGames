@@ -8,6 +8,7 @@ namespace Assets.CodeBase.Infrastructure.Factory
     public class GameFactory : IGameFactory
     {
         private IAsset _assetProvider;
+        
 
         public List<ISavedProgressReader> ProgressReaders { get; } = new List<ISavedProgressReader>();
         public List<ISavedProgress>  ProgressesWrites { get; } = new List<ISavedProgress>();
@@ -15,6 +16,10 @@ namespace Assets.CodeBase.Infrastructure.Factory
         {
             _assetProvider = assets;
         }
+        
+        public GameObject CreateHud() =>
+            _assetProvider.Instantiate(AssetPath.Hud);
+        
 
         public GameObject CreateHero(GameObject at) => 
             InstantiateRegistred(AssetPath.PlayerPath, at.transform.position);

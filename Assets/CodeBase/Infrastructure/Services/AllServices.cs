@@ -19,7 +19,7 @@ namespace Assets.CodeBase.Infrastructure.Services
         public TService Single<TService>() where TService : IService => 
             Implemenatation<TService>.ServicInstance;
 
-        public static class Implemenatation<TService> where TService : IService
+        private static class Implemenatation<TService> where TService : IService
         {
             public static TService ServicInstance;
         }
