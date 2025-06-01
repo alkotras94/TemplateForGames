@@ -22,6 +22,7 @@ namespace CodeBase.Hero
             _inputService = AllServices.Container.Single<IInputService>();
             _camera = Camera.main;
             _heroAnimator = GetComponent<HeroAnimator>();
+            CameraFollow();
         }
 
         void Update()
@@ -47,6 +48,10 @@ namespace CodeBase.Hero
         public void UpdateProgress(PlayerProgress playerProgress) => 
             playerProgress.WorldData.PositionOnLevel = new PositionOnLevel(CurrentLevel(),transform.position.AsVectorData());
 
+        private void CameraFollow()
+        {
+            _camera.GetComponent<CameraFollow>().Follow(gameObject);
+        }
         private static string CurrentLevel() =>
             SceneManager.GetActiveScene().name;
         
