@@ -6,7 +6,7 @@ namespace CodeBase.Enemy
     public class EnemyAntAnimator : MonoBehaviour
     {
         private static readonly int Die = Animator.StringToHash("Die");
-        private static readonly int Move = Animator.StringToHash("Walk");
+        private static readonly int Move = Animator.StringToHash("Move");
         private static readonly int Idle = Animator.StringToHash("Idle");
         private Animator _animator;
         private void Awake() =>

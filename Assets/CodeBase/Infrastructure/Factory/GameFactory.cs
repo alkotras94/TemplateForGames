@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Assets.CodeBase.AssetManagment;
 using CodeBase.Infrastructure.Services.PersistentProgress;
 using UnityEngine;
@@ -19,10 +20,17 @@ namespace Assets.CodeBase.Infrastructure.Factory
         
         public GameObject CreateHud() =>
             _assetProvider.Instantiate(AssetPath.Hud);
-        
 
-        public GameObject CreateHero(GameObject at) => 
-            InstantiateRegistred(AssetPath.PlayerPath, at.transform.position);
+
+        public GameObject HeroGameObject { get; set; }
+        public event Action HeroCreated;
+
+        public GameObject CreateHero(GameObject at)
+        {
+            HeroGameObject = InstantiateRegistred(AssetPath.PlayerPath, at.transform.position);
+            HeroCreated?.Invoke();
+            return HeroGameObject;
+        }
 
         private GameObject InstantiateRegistred(string prefabPath, Vector3 position)
         {
