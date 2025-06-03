@@ -7,7 +7,7 @@ namespace CodeBase.Enemy
     [RequireComponent(typeof(EnemyAntAnimator))]
     [RequireComponent(typeof(NavMeshAgent))]
     public class AnimateAlongAgent : MonoBehaviour
-    {
+    { 
         public EnemyAntAnimator Animator;
         public NavMeshAgent Agent;
         

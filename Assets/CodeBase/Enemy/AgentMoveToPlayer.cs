@@ -6,7 +6,7 @@ using UnityEngine.AI;
 
 namespace CodeBase.Enemy
 {
-    public class AgentMoveToPlayer : MonoBehaviour
+    public class AgentMoveToPlayer : Follow
     {
         private const float MinimalDistance = 1;
         
@@ -35,8 +35,6 @@ namespace CodeBase.Enemy
                 Agent.destination = _heroTransform.position;
                 RotationAgent();
             }
-
-            PositionFixationZ();
         }
 
 
@@ -56,12 +54,6 @@ namespace CodeBase.Enemy
             Vector2 direction = _heroTransform.position - transform.position;
             float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
             transform.rotation = Quaternion.Euler(0, 0, angle);
-        }
-        private void PositionFixationZ()
-        {
-            Vector3 pos = transform.position;
-            pos.z = 0f; 
-            transform.position = pos;
         }
     }
 }
