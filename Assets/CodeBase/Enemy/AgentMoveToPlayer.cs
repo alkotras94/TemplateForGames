@@ -8,7 +8,7 @@ namespace CodeBase.Enemy
 {
     public class AgentMoveToPlayer : Follow
     {
-        private const float MinimalDistance = 1;
+        private const float MinimalDistance = 1f;
         
         public NavMeshAgent Agent;
         private Transform _heroTransform;
@@ -47,7 +47,7 @@ namespace CodeBase.Enemy
         private void InitializeHeroTransform() => 
             _heroTransform = _gameFactory.HeroGameObject.transform;
         private bool HeroNotReached() => 
-            Vector2.Distance(Agent.destination, _heroTransform.position) >= MinimalDistance;
+            Vector2.Distance(Agent.destination, _heroTransform.position) > MinimalDistance;
 
         private void RotationAgent()
         {

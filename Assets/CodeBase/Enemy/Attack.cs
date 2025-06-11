@@ -16,9 +16,9 @@ namespace CodeBase.Enemy
         private float _attackCooldown;
         private bool _isAttacking;
         private Collider2D[] _hits = new Collider2D[1];
-        private float Cleavage = 1f;
+        private float Cleavage = 0.5f;
         private int _layerMask;
-        private float EfectiveDistance;
+        private float EfectiveDistance = 0.1f;
         private bool _attackIsActive = true;
 
         private void Awake()
@@ -26,7 +26,7 @@ namespace CodeBase.Enemy
             _gameFactory = AllServices.Container.Single<IGameFactory>();
             _gameFactory.HeroCreated += OnHeroCreated;
 
-            Cleavage = 1 << LayerMask.NameToLayer("Player");
+            _layerMask = 1 << LayerMask.NameToLayer("Player");
         }
 
         private void Update()
@@ -39,17 +39,21 @@ namespace CodeBase.Enemy
         
         private void StartAttack()
         {
-            transform.LookAt(_heroTransform); //Может быть ошибка так как у меня 2д игра
+            LookAtAgent();
+
+            //.LookAt(_heroTransform); //Может быть ошибка так как у меня 2д игра
             Animator.PlayAttack(); //Пока что вместо атаки вызываем состояние ожидания
             
             _isAttacking = true;
         }
+
 
         private void OnAttack()
         {
             if (Hit(out Collider2D hit))
             {
                 PhysicsDebug.DrowDebug(StartPoin(), Cleavage, 2);
+                Debug.Log("Hit on Hero");
             }    
         }
 
@@ -61,9 +65,15 @@ namespace CodeBase.Enemy
             
             return hitsCount > 0;
         }
+        private void LookAtAgent()
+        {
+            Vector2 direction = _heroTransform.position - transform.position;
+            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+            transform.rotation = Quaternion.Euler(0, 0, angle);
+        }
 
         private Vector2 StartPoin() => 
-            new Vector2(transform.position.x, transform.position.y) * transform.forward * EfectiveDistance;
+            (Vector2)transform.position + (Vector2)transform.right * EfectiveDistance;
 
         private void OnAttackEnded()
         {
@@ -77,7 +87,7 @@ namespace CodeBase.Enemy
         }
         
         private bool CanAttack() => 
-            _attackIsActive && _isAttacking && CooldownIsUp();
+            _attackIsActive && !_isAttacking && CooldownIsUp();
         private bool CooldownIsUp() => 
             _attackCooldown <= 0f;
         private void OnHeroCreated() => 
