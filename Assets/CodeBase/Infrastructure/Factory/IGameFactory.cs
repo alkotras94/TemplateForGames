@@ -15,5 +15,7 @@ namespace Assets.CodeBase.Infrastructure.Factory
         List<ISavedProgressReader> ProgressReaders { get; }
         List<ISavedProgress> ProgressesWrites { get; }
         void Cleanup();
+        void Register(ISavedProgressReader progressReader);
+
     }
 }
