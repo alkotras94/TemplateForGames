@@ -10,7 +10,7 @@ namespace CodeBase.Hero
     public class HeroHealth : MonoBehaviour, ISavedProgress
     {
         private State _state;
-        public Action HealthChanged; 
+        public event Action HealthChanged; 
 
         public float Current
         {
@@ -19,8 +19,8 @@ namespace CodeBase.Hero
             {
                 if (_state.CurrentHp != value)
                 {
-                HealthChanged?.Invoke();
                 _state.CurrentHp = value;
+                HealthChanged?.Invoke();
                 }
             } 
         }
@@ -45,8 +45,10 @@ namespace CodeBase.Hero
 
         public void TakeDamage(float damage)
         {
-            if(Current <= 0)
+            if (Current <= 0)
+            {
                 return;
+            }
             
             Current -= damage;
         }

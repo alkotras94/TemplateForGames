@@ -7,7 +7,8 @@ namespace CodeBase.Hero
         public Animator _animator;
         private const string WalkPath = "Walk";
         private const string IdlePath = "Idle";
-        
+        private const string Death = "Death";
+
         public void Walk(Vector2 dir)
         {
             _animator.SetFloat(WalkPath, dir.sqrMagnitude);
@@ -16,6 +17,11 @@ namespace CodeBase.Hero
         public void Idle(Vector2 dir)
         {
             _animator.SetFloat(IdlePath, dir.sqrMagnitude);
+        }
+
+        public void PlayDeath()
+        {
+            _animator.SetTrigger(Death);
         }
     }
 }

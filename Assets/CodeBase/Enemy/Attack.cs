@@ -2,6 +2,7 @@
 using System.Linq;
 using Assets.CodeBase.Infrastructure.Factory;
 using Assets.CodeBase.Infrastructure.Services;
+using CodeBase.Hero;
 using UnityEngine;
 
 namespace CodeBase.Enemy
@@ -10,6 +11,7 @@ namespace CodeBase.Enemy
     {
         public EnemyAntAnimator Animator;
         public float AttackCooldown = 3f;
+        private float Damage = 10f;
         
         private IGameFactory _gameFactory;
         private Transform _heroTransform;
@@ -53,7 +55,8 @@ namespace CodeBase.Enemy
             if (Hit(out Collider2D hit))
             {
                 PhysicsDebug.DrowDebug(StartPoin(), Cleavage, 2);
-                Debug.Log("Hit on Hero");
+                hit.transform.GetComponent<HeroHealth>().TakeDamage(Damage);
+                //Debug.Log("Hit on Hero");
             }    
         }
 
