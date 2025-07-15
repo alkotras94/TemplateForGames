@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Assets.CodeBase.Infrastructure.Services;
 using CodeBase.Infrastructure.Services.PersistentProgress;
+using CodeBase.StaticData;
 using UnityEngine;
 
 namespace Assets.CodeBase.Infrastructure.Factory
@@ -17,5 +18,6 @@ namespace Assets.CodeBase.Infrastructure.Factory
         void Cleanup();
         void Register(ISavedProgressReader progressReader);
 
+        GameObject CreateEnemy(EnemyTypeID typeId, Transform transform);
     }
 }

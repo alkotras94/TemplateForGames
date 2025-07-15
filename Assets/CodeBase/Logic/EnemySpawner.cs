@@ -1,4 +1,5 @@
 ﻿using System;
+using Assets.CodeBase.Infrastructure.Factory;
 using CodeBase.Data;
 using CodeBase.Infrastructure.Services.PersistentProgress;
 using CodeBase.StaticData;
@@ -9,9 +10,10 @@ namespace Assets.CodeBase.Logic
     public class EnemySpawner : MonoBehaviour, ISavedProgress
     {
         public EnemyTypeID TypeId;
+        public bool Slain => _slain;
         private string _id;
-
-        public bool Slain;
+        private bool _slain;
+        private IGameFactory _factory;
 
         private void Awake()
         {
@@ -20,18 +22,18 @@ namespace Assets.CodeBase.Logic
         public void LoadProgress(PlayerProgress playerProgress)
         {
             if(playerProgress.KillData.ClearedSpawners.Contains(_id))
-                Slain = true;
+                _slain = true;
             else
                 Spawn();
         }
         public void UpdateProgress(PlayerProgress playerProgress)
         {
-            if (Slain)
+            if (_slain)
                 playerProgress.KillData.ClearedSpawners.Add(_id);
         }
         private void Spawn()
         {
-            
+            GameObject enemy =  _factory.CreateEnemy(TypeId, transform);
         }
     }
 }
