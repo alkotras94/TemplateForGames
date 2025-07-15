@@ -14,18 +14,13 @@ namespace CodeBase.Enemy
         private Transform _heroTransform;
         
         private IGameFactory  _gameFactory;
-
-        void Start()	{
+        public void Construct(Transform heroTransform)
+        {
             Agent = GetComponent<NavMeshAgent>();
             Agent.updateRotation = false;
             Agent.updateUpAxis = false;
-
-            _gameFactory = AllServices.Container.Single<IGameFactory>();
-
-            if (_gameFactory.HeroGameObject != null)
-                InitializeHeroTransform();
-            else
-                _gameFactory.HeroCreated += HeroCreated;
+            
+            _heroTransform = heroTransform;
         }
 
         private void Update()
@@ -37,15 +32,9 @@ namespace CodeBase.Enemy
             }
         }
 
-
         private bool Initialized() => 
             _heroTransform != null;
-
-        private void HeroCreated() => 
-            InitializeHeroTransform();
-
-        private void InitializeHeroTransform() => 
-            _heroTransform = _gameFactory.HeroGameObject.transform;
+        
         private bool HeroNotReached() => 
             Vector2.Distance(Agent.destination, _heroTransform.position) > MinimalDistance;
 
@@ -55,5 +44,6 @@ namespace CodeBase.Enemy
             float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
             transform.rotation = Quaternion.Euler(0, 0, angle);
         }
+
     }
 }

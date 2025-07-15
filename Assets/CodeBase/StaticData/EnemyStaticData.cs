@@ -14,6 +14,8 @@ namespace CodeBase.StaticData
         public float EffectiveDistance;
         [Range(0.5f,1f)]
         public float Cleavage;
+        [Range(1f,100f)]
+        public float MoveSpeed;
         public GameObject Prefab;
     }
 }

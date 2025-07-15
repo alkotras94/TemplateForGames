@@ -10,11 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6fb54ebaf7e84b20a42d3cc0d2262569, type: 3}
-  m_Name: EnemyData
+  m_Name: Ant
   m_EditorClassIdentifier: 
   EnemyTypeID: 10
-  HP: 55
-  Damage: 7
-  EffectiveDistance: 0.722
-  Cleavage: 0.804
-  Prefab: {fileID: 0}
+  HP: 18
+  Damage: 1.8
+  EffectiveDistance: 0.694
+  Cleavage: 0.709
+  MoveSpeed: 2
+  Prefab: {fileID: 4217269256155922195, guid: f0a46fb38a110ab46bca331d671eef95, type: 3}

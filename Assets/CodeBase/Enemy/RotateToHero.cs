@@ -12,13 +12,9 @@ namespace CodeBase.Enemy
         private Vector2 _positionToLook;
         private IGameFactory  _gameFactory;
 
-        void Start()	{
-            _gameFactory = AllServices.Container.Single<IGameFactory>();
-
-            if (HeroExists())
-                InitializeHeroTransform();
-            else
-                _gameFactory.HeroCreated += InitializeHeroTransform;
+        public void Construct(Transform heroTransform)
+        {
+            _heroTransform = heroTransform;
         }
 
         private void Update()
@@ -26,11 +22,7 @@ namespace CodeBase.Enemy
             if (Initialized())
                 RotateTowardsHero();
         }
-
-        private bool HeroExists() => 
-            _gameFactory.HeroGameObject != null;
-        private void InitializeHeroTransform() => 
-            _heroTransform = _gameFactory.HeroGameObject.transform;
+        
         private void RotateTowardsHero()
         {
             UpdatePositionToLookAt();

@@ -1,5 +1,6 @@
 ﻿using System;
 using Assets.CodeBase.Infrastructure.Factory;
+using Assets.CodeBase.Infrastructure.Services;
 using CodeBase.Data;
 using CodeBase.Infrastructure.Services.PersistentProgress;
 using CodeBase.StaticData;
@@ -18,6 +19,7 @@ namespace Assets.CodeBase.Logic
         private void Awake()
         {
             _id = GetComponent<UniqueId>().Id;
+            _factory = AllServices.Container.Single<IGameFactory>();
         }
         public void LoadProgress(PlayerProgress playerProgress)
         {
@@ -33,7 +35,7 @@ namespace Assets.CodeBase.Logic
         }
         private void Spawn()
         {
-            GameObject enemy =  _factory.CreateEnemy(TypeId, transform);
+            _factory.CreateEnemy(TypeId, transform);
         }
     }
 }

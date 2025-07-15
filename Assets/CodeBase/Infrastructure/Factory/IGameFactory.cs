@@ -9,8 +9,6 @@ namespace Assets.CodeBase.Infrastructure.Factory
 {
     public interface IGameFactory : IService
     {
-        GameObject HeroGameObject { get; }
-        event Action HeroCreated;
         GameObject CreateHero(GameObject at);
         GameObject CreateHud();
         List<ISavedProgressReader> ProgressReaders { get; }

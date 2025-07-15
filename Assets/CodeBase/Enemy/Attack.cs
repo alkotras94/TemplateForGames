@@ -11,23 +11,23 @@ namespace CodeBase.Enemy
     {
         public EnemyAntAnimator Animator;
         public float AttackCooldown = 3f;
-        private float Damage = 10f;
+        public float Damage = 10f;
+        public float Cleavage = 0.5f;
+        public float EfectiveDistance = 0.1f;
         
-        private IGameFactory _gameFactory;
         private Transform _heroTransform;
         private float _attackCooldown;
         private bool _isAttacking;
         private Collider2D[] _hits = new Collider2D[1];
-        private float Cleavage = 0.5f;
         private int _layerMask;
-        private float EfectiveDistance = 0.1f;
         private bool _attackIsActive = true;
 
+        public void Construct(Transform heroTransform)
+        {
+            _heroTransform = heroTransform;
+        }
         private void Awake()
         {
-            _gameFactory = AllServices.Container.Single<IGameFactory>();
-            _gameFactory.HeroCreated += OnHeroCreated;
-
             _layerMask = 1 << LayerMask.NameToLayer("Player");
         }
 
@@ -93,13 +93,12 @@ namespace CodeBase.Enemy
             _attackIsActive && !_isAttacking && CooldownIsUp();
         private bool CooldownIsUp() => 
             _attackCooldown <= 0f;
-        private void OnHeroCreated() => 
-            _heroTransform = _gameFactory.HeroGameObject.transform;
 
         public void EnableAttack() => 
             _attackIsActive = true;
 
         public void DisableAttack() => 
             _attackIsActive = false;
+
     }
 }

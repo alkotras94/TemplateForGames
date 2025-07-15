@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using Assets.CodeBase.AssetManagment;
 using Assets.CodeBase.Infrastructure.Services;
+using CodeBase.Enemy;
 using CodeBase.Infrastructure.Services.PersistentProgress;
 using CodeBase.StaticData;
 using UnityEngine;
+using UnityEngine.AI;
 using Object = System.Object;
 
 namespace Assets.CodeBase.Infrastructure.Factory
@@ -14,6 +16,7 @@ namespace Assets.CodeBase.Infrastructure.Factory
         private IAsset _assetProvider;
         private IGameFactory _gameFactoryImplementation;
         private readonly IStaticDataService _staticData;
+        private GameObject HeroGameObject { get; set; }
 
 
         public List<ISavedProgressReader> ProgressReaders { get; } = new List<ISavedProgressReader>();
@@ -26,22 +29,28 @@ namespace Assets.CodeBase.Infrastructure.Factory
         
         public GameObject CreateHud() =>
             _assetProvider.Instantiate(AssetPath.Hud);
-
-
-        public GameObject HeroGameObject { get; set; }
-        public event Action HeroCreated;
+        
 
         public GameObject CreateHero(GameObject at)
         {
             HeroGameObject = InstantiateRegistred(AssetPath.PlayerPath, at.transform.position);
-            HeroCreated?.Invoke();
             return HeroGameObject;
         }
         public GameObject CreateEnemy(EnemyTypeID typeId, Transform parent)
         {
             EnemyStaticData enemyData =  _staticData.ForEnemy(typeId);
-            GameObject enemy = GameObject.Instantiate(enemyData.Prefab, parent.position, Quaternion.identity);
+            GameObject enemy = GameObject.Instantiate(enemyData.Prefab, parent.position, Quaternion.identity, parent);
+            enemy.GetComponent<AgentMoveToPlayer>().Construct(HeroGameObject.transform);
+            enemy.GetComponent<NavMeshAgent>().speed = enemyData.MoveSpeed;
 
+            var attack = enemy.GetComponent<Attack>();
+            attack.Construct(HeroGameObject.transform);
+            attack.Damage = enemyData.Damage;
+            attack.Cleavage = enemyData.Cleavage;
+            attack.EfectiveDistance = enemyData.EffectiveDistance;
+            
+            enemy.GetComponent<RotateToHero>()?.Construct(HeroGameObject.transform);
+            
             return enemy;
         }
 
