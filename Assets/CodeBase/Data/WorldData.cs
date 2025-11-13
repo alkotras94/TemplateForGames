@@ -3,11 +3,11 @@
 namespace CodeBase.Data
 {
     [Serializable]
-    public class WorlData
+    public class WorldData
     {
         public PositionOnLevel PositionOnLevel;
 
-        public WorlData(string initialLevel)
+        public WorldData(string initialLevel)
         {
             PositionOnLevel = new PositionOnLevel(initialLevel);
         }

@@ -5,6 +5,8 @@ using Assets.CodeBase.Logic;
 using CodeBase.Hero;
 using CodeBase.Infrastructure.Services.PersistentProgress;
 using CodeBase.UI;
+using CodeBase.UI.Elements;
+using CodeBase.UI.Services.Factory;
 using UnityEngine;
 
 namespace Assets.CodeBase.Infrastructure.States
@@ -18,14 +20,16 @@ namespace Assets.CodeBase.Infrastructure.States
         private readonly LoadingCurtain _loadingCurtain;
         private readonly IGameFactory _gameFactory;
         private readonly IPersistentProgressService _progressService;
+        private readonly IUIFactory _uIFactory;
 
-        public LoadLevelState(GameStateMachine gameStateMachine, SceneLoader sceneLoader, LoadingCurtain loadingCurtain, IGameFactory gameFactory, IPersistentProgressService progressService)
+        public LoadLevelState(GameStateMachine gameStateMachine, SceneLoader sceneLoader, LoadingCurtain loadingCurtain, IGameFactory gameFactory, IPersistentProgressService progressService, IUIFactory uIFactory)
         {
             _gameStateMachine = gameStateMachine;
             _sceneLoader = sceneLoader;
             _loadingCurtain = loadingCurtain;
             _gameFactory = gameFactory;
             _progressService = progressService;
+            _uIFactory = uIFactory;
         }
 
         public void Enter(string sceneName)
@@ -42,8 +46,14 @@ namespace Assets.CodeBase.Infrastructure.States
 
         private void onLoaded()
         {
+            InitUIRoot();
             InitGameWorld();
             InformProgressReaders();
+        }
+
+        private void InitUIRoot()
+        {
+            _uIFactory.CreateUIRoot();
         }
 
         private void InformProgressReaders()

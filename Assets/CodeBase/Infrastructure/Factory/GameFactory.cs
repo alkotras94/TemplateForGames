@@ -5,6 +5,8 @@ using Assets.CodeBase.Infrastructure.Services;
 using CodeBase.Enemy;
 using CodeBase.Infrastructure.Services.PersistentProgress;
 using CodeBase.StaticData;
+using CodeBase.UI.Elements;
+using CodeBase.UI.Services.Windows;
 using UnityEngine;
 using UnityEngine.AI;
 using Object = System.Object;
@@ -16,20 +18,31 @@ namespace Assets.CodeBase.Infrastructure.Factory
         private IAsset _assetProvider;
         private IGameFactory _gameFactoryImplementation;
         private readonly IStaticDataService _staticData;
+        private readonly IWindowService _windowService;
         private GameObject HeroGameObject { get; set; }
 
 
         public List<ISavedProgressReader> ProgressReaders { get; } = new List<ISavedProgressReader>();
         public List<ISavedProgress>  ProgressesWrites { get; } = new List<ISavedProgress>();
-        public GameFactory(IAsset assets, IStaticDataService staticData)
+        public GameFactory(IAsset assets, IStaticDataService staticData, IWindowService windowService)
         {
             _assetProvider = assets;
             _staticData = staticData;
+            _windowService = windowService;
         }
         
-        public GameObject CreateHud() =>
-            _assetProvider.Instantiate(AssetPath.Hud);
-        
+        public GameObject CreateHud()
+        {
+            GameObject hud =  _assetProvider.Instantiate(AssetPath.Hud);
+
+            foreach (OpenWindowButton openWindowButton in hud.GetComponentsInChildren<OpenWindowButton>())
+            {
+                openWindowButton.Construct(_windowService);
+            }
+
+            return hud;
+        }
+
 
         public GameObject CreateHero(GameObject at)
         {

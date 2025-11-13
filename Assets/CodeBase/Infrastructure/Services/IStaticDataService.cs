@@ -1,4 +1,7 @@
 ﻿using CodeBase.StaticData;
+using CodeBase.StaticData.Windows;
+using CodeBase.UI.Services.Windows;
+using UnityEngine;
 
 namespace Assets.CodeBase.Infrastructure.Services
 {
@@ -6,5 +9,6 @@ namespace Assets.CodeBase.Infrastructure.Services
     {
         void LoadEnemy();
         EnemyStaticData ForEnemy(EnemyTypeID enemyTypeID);
+        WindowConfig ForWindow(WindowId windowId);
     }
 }
